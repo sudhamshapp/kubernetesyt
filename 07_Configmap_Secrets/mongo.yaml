@@ -19,7 +19,7 @@ spec:
         image: mongo
         ports:
         - containerPort: 27017
-        env:
+        env: # these are completely referenced from mongo.secrets.yml
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:

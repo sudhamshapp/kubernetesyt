@@ -1,6 +1,7 @@
+#this url is belongs to ingress controller
 #https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.1/deploy/static/provider/cloud/deploy.yaml
 apiVersion: networking.k8s.io/v1
-kind: Ingress
+kind: Ingress #this is a ingress resource
 metadata:
   name: k8s-ingress
   annotations:

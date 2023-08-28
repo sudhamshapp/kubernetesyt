@@ -1,8 +1,8 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: gcp-storage-class
-provisioner: kubernetes.io/gce-pd
+  name: aws-storage-class
+provisioner: kubernetes.io/aws-ebs
 parameters:
-  type: pd-standard
+  type: gp2
 reclaimPolicy: Delete
