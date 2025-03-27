@@ -32,3 +32,23 @@ spec:
     protocol: TCP
   selector:
     app: my-app-lb
+
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl apply -f deploy-lb.yml
+# deployment.apps/my-deployment-lb created
+# service/my-app-lb created
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get pods -o wide
+# NAME                                READY   STATUS    RESTARTS   AGE   IP              NODE                            NOMINATED NODE   READINESS GATES
+# my-deployment-lb-68d955b969-sb7pw   1/1     Running   0          12s   192.168.5.153   ip-192-168-0-164.ec2.internal   <none>           <none>
+# my-deployment-lb-68d955b969-xpb2n   1/1     Running   0          12s   192.168.40.18   ip-192-168-51-17.ec2.internal   <none>           <none>
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get svc
+# NAME         TYPE           CLUSTER-IP     EXTERNAL-IP                                                               PORT(S)        AGE
+# kubernetes   ClusterIP      10.100.0.1     <none>                                                                    443/TCP        130m
+# my-app-lb    LoadBalancer   10.100.82.86   a9aec45e8abd14290b97cbc0e603c6ae-1976574604.us-east-1.elb.amazonaws.com   80:31784/TCP   20s
+
+# Finally pick the the load LoadBalancer id and hit on the browser - a9aec45e8abd14290b97cbc0e603c6ae-1976574604.us-east-1.elb.amazonaws.com
