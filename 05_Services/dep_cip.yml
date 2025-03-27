@@ -32,3 +32,29 @@ spec:
     protocol: TCP
   selector:
     app: my-app-cip
+
+
+# we can access the application that is exposed as a service as a cluster ip
+
+# First we need to ssh in to the nodes through UI/on the cli 
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get nodes -o wide
+# NAME                            STATUS   ROLES    AGE    VERSION               INTERNAL-IP     EXTERNAL-IP     OS-IMAGE         KERNEL-VERSION                  CONTAINER-RUNTIME
+# ip-192-168-0-164.ec2.internal   Ready    <none>   105m   v1.30.9-eks-5d632ec   192.168.0.164   54.83.126.156   Amazon Linux 2   5.10.234-225.910.amzn2.x86_64   containerd://1.7.25
+# ip-192-168-51-17.ec2.internal   Ready    <none>   105m   v1.30.9-eks-5d632ec   192.168.51.17   18.212.31.232   Amazon Linux 2   5.10.234-225.910.amzn2.x86_64   containerd://1.7.25
+
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get svc
+# NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+# kubernetes   ClusterIP   10.100.0.1     <none>        443/TCP   110m
+# my-app-cip   ClusterIP   10.100.50.61   <none>        80/TCP    76m
+
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get svc my-app-cip
+# NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+# my-app-cip   ClusterIP   10.100.50.61   <none>        80/TCP    77m
+
+# Finally, curl http://10.100.50.61:80 on the node you are in
