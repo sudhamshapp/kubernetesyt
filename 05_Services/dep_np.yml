@@ -32,3 +32,31 @@ spec:
     protocol: TCP
   selector:
     app: my-app-np
+
+
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl apply -f deploy-np.yml
+# deployment.apps/my-deployment-np created
+# service/my-app-np created
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get pods -o wide
+# NAME                                READY   STATUS    RESTARTS   AGE   IP               NODE                            NOMINATED NODE   READINESS GATES
+# my-deployment-np-6f9c88f7b9-8wvjf   1/1     Running   0          12s   192.168.44.173   ip-192-168-51-17.ec2.internal   <none>           <none>
+# my-deployment-np-6f9c88f7b9-jl9sz   1/1     Running   0          12s   192.168.16.146   ip-192-168-0-164.ec2.internal   <none>           <none>
+# my-deployment-np-6f9c88f7b9-mjbq7   1/1     Running   0          12s   192.168.5.153    ip-192-168-0-164.ec2.internal   <none>           <none>
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get svc
+# NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+# kubernetes   ClusterIP   10.100.0.1     <none>        443/TCP        123m
+# my-app-np    NodePort    10.100.255.5   <none>        80:31026/TCP   21s
+
+# csudhams@LIN-PF30TY5M MINGW64 ~
+# $ kubectl get nodes -o wide
+# NAME                            STATUS   ROLES    AGE    VERSION               INTERNAL-IP     EXTERNAL-IP     OS-IMAGE         KERNEL-VERSION                  CONTAINER-RUNTIME
+# ip-192-168-0-164.ec2.internal   Ready    <none>   117m   v1.30.9-eks-5d632ec   192.168.0.164   54.83.126.156   Amazon Linux 2   5.10.234-225.910.amzn2.x86_64   containerd://1.7.25
+# ip-192-168-51-17.ec2.internal   Ready    <none>   117m   v1.30.9-eks-5d632ec   192.168.51.17   18.212.31.232   Amazon Linux 2   5.10.234-225.910.amzn2.x86_64   containerd://1.7.25
+
+# Finally we can access the application on node's external-ip and the nodeport that it's exposed - 54.83.126.156:31026 on the browser
